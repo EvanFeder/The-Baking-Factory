@@ -3,7 +3,18 @@ Rails.application.routes.draw do
   # Routes for main resources
   resources :addresses
   resources :customers
+  resources :item_prices
+  resources :items
+  resources :order_items
   resources :orders
+
+  # Authentication
+  resources :sessions
+  resources :users
+  get 'users/new', to: 'users#new', as: :signup
+  get 'user/edit', to: 'users#edit', as: :edit_current_user
+  get 'login', to: 'sessions#new', as: :login
+  get 'logout', to: 'sessions#destroy', as: :logout
 
   # Semi-static page routes
   get 'home' => 'home#home', as: :home
