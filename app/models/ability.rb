@@ -11,17 +11,57 @@ class Ability
         can :manage, :all
         
       elsif user.role? :customer
-        
-  
+        can :read, Item
+        can :show, Item
+
+        can :show, Customer do |this_customer|  
+            user.customer == this_customer
+        end
+
+        can :update, Customer do |this_customer|  
+            user.customer == this_customer
+        end
+
+        can :show, User do |u|  
+            u.id == user.id
+        end
+
+        can :update, User do |u|  
+            u.id == user.id
+        end
+
+        can :show, Order do |this_order|  
+            my_orders = user.customer.orders.map(&:id)
+            my_orders.include? this_order.id 
+        end
+
+        can :create, Order
+        can :checkout, Order
+        can :add_to_cart, Order
+
+        can :manage, Address do |this_address|  
+            my_addresses = user.customer.addresses.map(&:id)
+            my_addresses.include? this_address.id 
+        end
+
   
       elsif user.role? :baker
-
+        can :read, Item
+        can :show, Item
+        can :read, Order
 
       elsif user.role? :shipper
-      
+        can :read, Item
+        can :show, Item
+        can :read, Order
+        can :show, Order
+        can :read, Address
         
       else
-        # Guests can only read home page
+        # Guests can only read home page and items and become users
+        can :read, Item
+        can :show, Item
+        can :create, Customer
     
       end
     end
