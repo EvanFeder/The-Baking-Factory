@@ -14,6 +14,11 @@ class Ability
         can :read, Item
         can :show, Item
 
+        can :index, Order
+        can :create, Order
+        can :checkout, Order
+        can :add_to_cart, Order
+
         can :show, Customer do |this_customer|  
             user.customer == this_customer
         end
@@ -35,31 +40,27 @@ class Ability
             my_orders.include? this_order.id 
         end
 
-        can :create, Order
-        can :checkout, Order
-        can :add_to_cart, Order
-
         can :manage, Address do |this_address|  
             my_addresses = user.customer.addresses.map(&:id)
             my_addresses.include? this_address.id 
         end
 
-  
       elsif user.role? :baker
-        can :read, Item
+        can :index, Item
         can :show, Item
-        can :read, Order
+        can :index, Order
 
       elsif user.role? :shipper
-        can :read, Item
+        can :index, Item
         can :show, Item
-        can :read, Order
+        can :index, Order
         can :show, Order
-        can :read, Address
+        can :index, Address
+        can :show, Address
         
       else
         # Guests can only read home page and items and become users
-        can :read, Item
+        can :index, Item
         can :show, Item
         can :create, Customer
     
