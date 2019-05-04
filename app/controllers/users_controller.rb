@@ -34,8 +34,8 @@ class UsersController < ApplicationController
         render action: 'edit'
       end
     end
-  
-  
+    
+
     private
     def set_user
         @user = User.find(params[:id])
