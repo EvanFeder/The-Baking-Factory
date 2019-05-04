@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
     before_action :set_order_item, only: [:show, :edit, :update, :destroy]
     before_action :check_login
+    authorize_resource
     
     def index
       @all_order_items = OrderItem.all.paginate(:page => params[:page]).per_page(10)

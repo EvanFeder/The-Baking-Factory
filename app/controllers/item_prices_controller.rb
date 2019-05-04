@@ -1,6 +1,7 @@
 class ItemPricesController < ApplicationController
     before_action :set_item_price, only: [:show, :edit, :update, :destroy]
     before_action :check_login
+    authorize_resource
     
     def index
       @item_prices = ItemPrice.chronological.paginate(:page => params[:page]).per_page(10)
