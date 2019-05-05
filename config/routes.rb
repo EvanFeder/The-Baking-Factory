@@ -3,9 +3,7 @@ Rails.application.routes.draw do
   # Routes for main resources
   resources :addresses
   resources :customers
-  resources :item_prices
   resources :items
-  resources :order_items
   resources :orders
 
   resources :carts
