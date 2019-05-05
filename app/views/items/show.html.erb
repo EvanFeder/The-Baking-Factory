@@ -2,9 +2,11 @@
   <div class="small-7 columns">
     <%= render partial: "item_details" %>
   </div>
-  <div class="col s4">
-    <%= render partial: "price_history" %>
-  </div>
+  <% if logged_in? && current_user.role?(:admin) %>
+    <div class="col s4">
+      <%= render partial: "price_history" %>
+    </div>
+  <% end %>
   <div class="col s4">
     <%= render partial: "partials/similar_items", locals: {similar_items: @similar_items}%>
   </div>

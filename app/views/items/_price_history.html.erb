@@ -6,7 +6,6 @@
         <tr>
           <th width="120">Price</th>
           <th width="100">Start Date</th>
-          <th width="100">End Date</th>
         </tr>
       </thead>
       <tbody>
@@ -14,13 +13,21 @@
         <tr>
           <td><%= number_to_currency price.price %></td>
           <td><%= price.start_date.strftime('%m/%d/%y') %></td>
-          <% if price.end_date.nil? %>
-            <td> N/A </td>
-          <% else %>
-            <td><%= price.end_date.strftime('%m/%d/%y') %></td>
-          <% end %>
         </tr>
       <% end %>
     </table>
+    <% if can? :new, ItemPrice %>
+      <div class="card-action">
+        <%= link_to "Change the price", new_item_price_path(item_id: @item.id) %>
+      </div>
+    <% end %>
   </div>
+<% else %>
+  <% if can? :new, ItemPrice %>
+  <div class="panel clearfix">
+    <div class="card-action">
+      <%= link_to "Change the price", new_item_price_path(item_id: @item.id) %>
+    </div>
+  </div>
+  <% end %>
 <% end %>

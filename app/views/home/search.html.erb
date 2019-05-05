@@ -1,0 +1,42 @@
+<h5>Search results for term <em> <%= @query %> </em></h5>
+<p class="supertiny">&nbsp;</p>
+
+<% if logged_in? && current_user.role?(:admin) %>
+    <% if @allitems.empty? %>
+        <p><em>No items match that query.</em></p>
+    <% else %>
+        <p><em><strong>Items matching term '<%= @query %>'</strong></em></p>
+        <ul>
+            <% for item in @allitems do %>
+            <li><%= link_to item.name, item_path(item) %></li>
+            <% end %>
+        </ul>
+        <p class="smtext">&nbsp;</p>
+    <% end %>
+    <br>
+    <% if @customers.empty? %>
+        <p><em>No customers match that query.</em></p>
+    <% else %>
+        <p><em><strong>Customers matching term '<%= @query %>'</strong></em></p>
+        <ul>
+            <% for customer in @customers do %>
+            <li><%= link_to customer.proper_name, customer_path(customer) %></li>
+            <% end %>
+        </ul>
+        <p class="supertiny">&nbsp;</p>
+    <% end %>
+<% else %>
+    <% if @activeitems.empty? %>
+        <p><em>No items match that query.</em></p>
+    <% else %>
+        <p><em><strong>Items matching term '<%= @query %>'</strong></em></p>
+        <ul>
+            <% for item in @activeitems do %>
+            <li><%= link_to item.name, item_path(item) %></li>
+            <% end %>
+        </ul>
+        <p class="smtext">&nbsp;</p>
+    <% end %>
+<% end %>
+
+

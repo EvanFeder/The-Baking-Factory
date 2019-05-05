@@ -1,5 +1,20 @@
-<%= render partial: "partials/index_structure", locals: {model_name: "item", 
-                                                         primary: "breads", 
-                                                         secondary: "muffins", 
-                                                         tertiary: "pastries",
-                                                         sidebar: nil} %>
+<%= render :partial => "partials/title_with_search", locals: {title: "A & M Goods"} %>                                                         
+<div class="row">
+  <div class="small-8 columns">
+    <!-- primary partial gets displayed here in main div -->
+    <%= render partial: "breads" %>
+    <!-- sometimes we want another partial below -->
+    <%= render partial: "muffins" %>
+    <!-- sometimes we want another partial below -->
+    <%= render partial: "pastries" %>
+    
+  </div>
+</div>
+
+<% if can? :edit, eval("Item") %>
+  <!-- Add a button for new instances of object -->
+  <%= link_to(eval("new_item_path"), class: "button radius") do %>
+    <!-- <i class="fa fa-plus"></i> -->
+    &nbsp;Add a New Item
+  <% end %>
+<% end %>
