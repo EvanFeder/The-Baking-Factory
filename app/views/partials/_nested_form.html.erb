@@ -1,0 +1,31 @@
+# An example of nested forms if using the "accepts_nested_attributes_for" approach
+# Context is projects and tasks, not customers and users
+# Assumes you are using simple_form and nested_form gems:
+# gem 'simple_form', '3.0.1'
+# gem 'nested_form','0.3.2'
+
+<%= simple_nested_form_for object, :html => { :class => 'form-horizontal' } do |f| %>
+	<div class="row">
+		<div class="small-7 columns">
+			<fieldset>
+		    <legend><%= controller.action_name.capitalize %> </legend>
+                <%= render partial: "#{fields1}", locals: { f: f } %>
+		  </fieldset>
+		</div>
+		<div class="small-5 columns">
+			<legend>Add some tasks to this project</legend>
+			<div id="project_tasks">
+				
+				<%= project_form.simple_fields_for :tasks do |task_form| %>
+					<%= render partial: "#{fields2}", locals: { f: f } %>
+				<% end %> <!-- end of one tasks form -->
+
+				
+			</div> <!-- end of project_tasks div -->
+		</div>
+	</div>
+	<div class="form-actions">
+    <%= project_form.submit nil, class: 'button radius' %>
+    <%= link_to 'Cancel', projects_path, class: 'button alert radius' %>
+  </div>
+<% end %>

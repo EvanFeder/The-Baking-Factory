@@ -1,0 +1,5 @@
+<%= f.simple_fields_for :user do |user_form| %>
+    <%= user_form.input :username, label_html: { class: 'active' } %>
+    <%= user_form.input :password, label_html: { class: 'active' } %>
+    <%= user_form.input :password_confirmation, label_html: { class: 'active' } %>
+<% end %> <!-- end of one tasks form -->

@@ -63,7 +63,7 @@ class Ability
         can :index, Item
         can :show, Item
         can :create, Customer
-        can :create, User
+        can :create, User # maybe not
     
       end
     end
