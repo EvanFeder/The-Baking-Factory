@@ -1,0 +1,14 @@
+<h3><%= @user.username %></h3>
+<p>
+  <b>Role</b>: <%= @user.role %>
+</p>
+
+<% if @user.role?(:customer) %>
+<p>
+  <%= link_to "Link to customer page", @user.customer %>
+</p>
+<% end %>
+
+<p>
+  <em>Account created in <%= @user.created_at.year %>.</em>
+</p>

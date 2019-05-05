@@ -26,25 +26,20 @@ class CustomersController < ApplicationController
   end
 
   def create
-    byebug
-
-    #convert users to user_attributes in the params
-    temp_params = customer_params
-    user_attributes = temp_params[:users]
-    user_attributes[:role] = "Customer"
-    user_attributes[:active] = true
-    temp_params[:user_attributes] = user_attributes
-    temp_params.delete(:users)
-
+    #byebug
     
-    @customer = Customer.new(temp_params)
-    
+    @customer = Customer.new(customer_params)
+    @customer.active = true
+    @customer.user.active = true
+    @customer.user.role = 'customer'
 
-    #@customer.user_id = @user.id
-
+  
     if @customer.save
-      redirect_to @customer, notice: "#{@customer.proper_name} was added to the system."
-      sessions[:user_id] = @customer.user_id
+      if logged_in? && @current_user.role?(:admin)
+        redirect_to @customer, notice: "#{@customer.proper_name} was added to the system."
+      else
+        redirect_to login_path, notice: "Account created! Please login for security purposes."
+      end
     else
       render action: 'new'
     end
@@ -76,10 +71,6 @@ class CustomersController < ApplicationController
     #convert_user_role
     params.require(:customer).permit(:first_name, :last_name, :email, :phone, :active, user_attributes: [:username, :password, :password_confirmation])
   end
-
-  # def user_params
-  #   params.require(:customer).permit(:username, :password, :password_confirmation, :role, :active)
-  # end
 
 
 

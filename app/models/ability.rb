@@ -50,6 +50,10 @@ class Ability
         can :show, Item
         can :index, Order
 
+        can :show, User do |u|  
+          u.id == user.id
+        end
+
       elsif user.role? :shipper
         can :index, Item
         can :show, Item
@@ -57,6 +61,10 @@ class Ability
         can :show, Order
         can :index, Address
         can :show, Address
+
+        can :show, User do |u|  
+          u.id == user.id
+        end
         
       else
         # Guests can only read home page and items and become users
