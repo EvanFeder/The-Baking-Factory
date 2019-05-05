@@ -1,28 +1,15 @@
-<div class="row">
-	<div class="small-7 columns">
-		<h2>Contact Bread Express</h2>
-		<p class="supertiny">&nbsp;</p>
-		<table cellpadding="3">
-			<tr>
-				<td>Webmaster:&nbsp;&nbsp;&nbsp;</td>
-				<td>Professor Larry Heimann</td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td>
-				<%= mail_to("profh@cmu.edu", "Klingon Code Warrior*", :encode => "javascript") %> 
-				</td>
-			</tr>
-			<tr>
-				<td>Phone:</td>
-				<td>412-268-8211</td>
-			</tr>
-		</table>
-
-		<p class="note"><br>*I am a professor of information systems at Carnegie Mellon University and this nickname was a little joke between myself and my students that I adopted as my signature for all my programming work.  
-			<br><br><em>... in truth I am only half-Klingon.</em></p>
-			
-			<p>&nbsp;</p>
-			<p>&nbsp;</p>
-	</div>
+<div class="row">    
+  <div class="col s9">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title"><em>Contact the A & M Team</em></span>
+        <p>
+          Please direct all site compliments and other positive notes to the webmaster Evan Feder at <%= mail_to("efeder@andrew.cmu.edu", "efeder@andrew.cmu.edu", encode: "javascript") %>. He's single, ladies!
+          </br></br>
+          Please direct all complaints to TA Alec Lam at <%= mail_to("ahlam@andrew.cmu.edu", "ahlam@andrew.cmu.edu", encode: "javascript") %>. It's probably his fault.
+        </p>
+        <p>&nbsp;</p>
+      </div>
+    </div>
+  </div>
 </div>

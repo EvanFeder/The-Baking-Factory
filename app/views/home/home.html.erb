@@ -1,3 +1,11 @@
-
+<% if logged_in? && current_user.role?(:admin) %>
+	<%= render :partial => 'admin_dashboard' %>
+<% elsif logged_in? && current_user.role?(:customer) %>
+	<%= render :partial => 'customer_dashboard' %>
+<% elsif logged_in? && current_user.role?(:baker) %>
+	<%= render :partial => 'basker_dashboard' %>
+<% elsif logged_in? && current_user.role?(:shipper) %>
+	<%= render :partial => 'shipper_dashboard' %>
+<% else %>
 	<%= render :partial => 'general_home' %>
-
+<% end %>
