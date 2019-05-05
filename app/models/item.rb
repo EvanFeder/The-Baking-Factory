@@ -1,3 +1,5 @@
+require './app/uploaders/picture_uploader.rb'
+
 class Item < ApplicationRecord
   # get modules to help with some functionality
   include AppHelpers::Validations
@@ -7,6 +9,8 @@ class Item < ApplicationRecord
 
   # List of allowable categories
   CATEGORIES = [['Bread','bread'],['Muffins','muffins'],['Pastries','pastries']]
+
+  mount_uploader :picture, PictureUploader
 
   # Relationships
   has_many :order_items
