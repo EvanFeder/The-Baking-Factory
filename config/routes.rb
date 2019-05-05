@@ -5,16 +5,16 @@ Rails.application.routes.draw do
   resources :customers
   resources :items
   resources :orders
-  resources :order_items
   
   get 'item_prices/new', to: 'item_pricess#new', as: :new_item_price
   post 'item_prices', to: 'item_prices#create', as: :item_prices
+  get 'order_items/new', to: 'order_items#new', as: :new_order_item
+  post 'order_items', to: 'order_items#create', as: :order_items
 
   # Authentication
   resources :sessions
   resources :users
-  get 'users/new', to: 'users#new', as: :signup
-  get 'user/edit', to: 'users#edit', as: :edit_current_user
+  get 'customers/new', to: 'customers#new', as: :signup
   get 'login', to: 'sessions#new', as: :login
   get 'logout', to: 'sessions#destroy', as: :logout
 
