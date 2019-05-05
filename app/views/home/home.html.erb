@@ -3,7 +3,7 @@
 <% elsif logged_in? && current_user.role?(:customer) %>
 	<%= render :partial => 'customer_dashboard' %>
 <% elsif logged_in? && current_user.role?(:baker) %>
-	<%= render :partial => 'basker_dashboard' %>
+	<%= render :partial => 'baker_dashboard' %>
 <% elsif logged_in? && current_user.role?(:shipper) %>
 	<%= render :partial => 'shipper_dashboard' %>
 <% else %>

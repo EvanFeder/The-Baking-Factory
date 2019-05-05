@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :customers
   resources :items
   resources :orders
+  resources :order_items
+  
+  get 'item_prices/new', to: 'item_pricess#new', as: :new_item_price
+  post 'item_prices', to: 'item_prices#create', as: :item_prices
 
   # Authentication
   resources :sessions

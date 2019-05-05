@@ -14,6 +14,8 @@
         <li><%= link_to 'Shop!', items_path %></li>
         <li><%= link_to 'My Addresses', addresses_path %></li>
         <li><%= link_to 'My Orders', orders_path %></li>
+      <% elsif logged_in? && current_user.role?(:baker) %>
+      <% elsif logged_in? && current_user.role?(:shipper) %>
       <% else %>
         <li><%= link_to 'Browse Goods', items_path %></li>
       <% end %> 
