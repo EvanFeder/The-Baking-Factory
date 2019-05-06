@@ -19,13 +19,11 @@
       <% else %>
         <li><%= link_to 'Browse Goods', items_path %></li>
       <% end %> 
-   
- 
-        
+
     </ul>
     <ul class="right">
       <% if logged_in? && current_user.role?(:customer) %>
-        <li><%= link_to 'Cart Checkout', cart_path %></li>
+        <li><%= link_to 'My Cart', cart_path %></li>
         <li><%= link_to 'My Account', customer_path(current_user.customer) %></li>
       <% elsif logged_in? && (current_user.role?(:shipper) || current_user.role?(:baker) || current_user.role?(:admin)) %>
         <li><%= link_to 'My Account', user_path(current_user) %></li>

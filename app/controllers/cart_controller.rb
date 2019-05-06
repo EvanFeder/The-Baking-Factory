@@ -1,5 +1,4 @@
 class CartController < ApplicationController
-    before_action :set_address, only: [:show, :edit, :update, :destroy]
     before_action :check_login
 
     include AppHelpers::Cart
@@ -10,13 +9,13 @@ class CartController < ApplicationController
     end
   
     def add_to_cart
-        add_item_to_cart(params[:id])
-        redirect_to cart_path
+      add_item_to_cart(params[:id])
+      redirect_to cart_path
     end
   
     def remove_from_cart
-        remove_item_from_cart(params[:id])
-        redirect_to cart_path
+      remove_item_from_cart(params[:id])
+      redirect_to cart_path
     end
  
   

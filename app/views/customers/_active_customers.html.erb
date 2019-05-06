@@ -8,6 +8,7 @@
         <th width="225">Name</th>
         <th width="125">Phone</th>
         <th width="200">Email</th>
+        <th width="75">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,13 @@
           <td><%= link_to customer.name, customer_path(customer) %></td>
           <td><%= number_to_phone customer.phone %></td>
           <td><%= mail_to customer.email, customer.email, encode: "javascript"  %></td>
+          <% if logged_in? && current_user.role?(:admin) %>
+            <td>
+              <%= link_to(edit_customer_path(customer), class: 'button tiny radius warning') do %>
+                <i class="material-icons">edit</i>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

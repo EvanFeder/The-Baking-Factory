@@ -1,6 +1,26 @@
 class HomeController < ApplicationController
 
   def home
+    if logged_in? && current_user.role?(:admin)
+
+    elsif logged_in? && current_user.role?(:customer)
+
+    elsif logged_in? && current_user.role?(:baker)
+      @breads = OrderItem.shipped.select{|o| o.item.category == "bread"}
+      @muffins = OrderItem.unshipped.select{|o| o.item.category == "muffins"}
+      @pastries = OrderItem.unshipped.select{|o| o.item.category == "pastries"}
+
+      @breads_hash = Hash.new(0)
+      @muffins_hash = Hash.new(0)
+      @pastries_hash = Hash.new(0)
+      
+      @breads.each { |good| @breads_hash[good] += good.quantity }
+      @muffins.each { |good| @muffins_hash[good] += good.quantity }
+      @pastries.each { |good| @pastries_hash[good] += good.quantity }
+
+    elsif logged_in? && current_user.role?(:shipper)
+
+    end
   end
 
   def about
@@ -18,5 +38,7 @@ class HomeController < ApplicationController
     @activeitems = Item.active.search(@query)
     @allitems = Item.search(@query)
   end
+
+
 
 end

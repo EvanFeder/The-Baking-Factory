@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   before_action :check_login
   authorize_resource
   
+  include AppHelpers::Cart
+
   def index
     if logged_in? && current_user.role?(:customer)
       @all_orders = current_user.customer.orders.chronological.paginate(:page => params[:page]).per_page(10)
@@ -23,6 +25,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.date = Date.current
     if @order.save
+      save_each_item_in_cart(@order)
       @order.pay
       redirect_to @order, notice: "Thank you for ordering from the Baking Factory."
     else

@@ -8,6 +8,7 @@
         <th width="225">Username</th>
         <th width="125">Role</th>
         <th width="200">Active?</th>
+        <th width="75">&nbsp;</th>
       </tr>
     </thead>
     <tbody>
@@ -16,6 +17,13 @@
           <td><%= link_to user.username, user_path(user) %></td>
           <td><%= user.role %></td>
           <td><%= user.active ? "Yes" : "No"  %></td>
+          <% if logged_in? && current_user.role?(:admin) %>
+            <td>
+              <%= link_to(edit_user_path(user), class: 'button tiny radius warning') do %>
+                <i class="material-icons">edit</i>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

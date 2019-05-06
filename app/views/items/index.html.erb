@@ -7,12 +7,9 @@
     <%= render partial: "muffins" %>
     <!-- sometimes we want another partial below -->
     <%= render partial: "pastries" %>
-    <div class="col s4">
-      <% if can? :edit, eval("Item") %>
-      <!-- render the sidebar, if it exists -->
+    <% if can? :edit, eval("Item") %>
       <%= render partial: "inactives" %>
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </div>
 

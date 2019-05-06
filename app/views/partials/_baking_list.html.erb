@@ -1,0 +1,18 @@
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th width="300">Item</th>
+    <th width="100">Quantity</th>
+    <th width="100">Units Per</th>
+  </tr>
+</thead>
+<tbody>
+  <% order_items.each do |oi, quantity| %>
+    <tr>
+      <td><%= link_to oi.item.name, item_path(oi.item) %></td>
+      <td align="center"><%= quantity %></td>
+      <td align="center"><%= oi.item.units_per_item %></td>
+    </tr>
+  <% end %>
+</tbody>
+</table>
