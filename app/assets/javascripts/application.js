@@ -15,6 +15,8 @@
 //= require materialize-sprockets
 //= require materialize-form
 //= require_tree .
+//= require Chart.bundle
+//= require chartkick
 
 // @import "materialize";
 // @import "https://fonts.googleapis.com/icon?family=Material+Icons";

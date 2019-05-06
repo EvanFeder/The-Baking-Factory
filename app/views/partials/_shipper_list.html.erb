@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="100">Quantity</th>
+      <th width="300">Item</th>
+      <th width="400">Address</th>
+      <th width="75">&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% order_items.each do |oi| %>
+      <tr>
+        <td align="center"><%= oi.quantity %></td>
+        <td><%= oi.item.name %></td>
+        <td> <%= render :partial => "partials/address_info", locals: {address: oi.order.address} %> </td>
+          <td>
+        <% if oi.shipped_on.nil? %>
+          <%= link_to("Mark as Shipped", mark_shipped_path(oi.id), method: 'patch') %>
+        <% else %>
+          <%= link_to("Mark as Unshipped", mark_unshipped_path(oi.id), method: 'patch') %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

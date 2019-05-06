@@ -1,0 +1,6 @@
+<h3> Shipping: </h3>
+<br>
+<h4> Unshipped </h4>
+<%= render partial: "partials/shipper_list", locals: {order_items: @unshipped} %>
+<h4> Shipped </h4>
+<%= render partial: "partials/shipper_list", locals: {order_items: @shipped} %>

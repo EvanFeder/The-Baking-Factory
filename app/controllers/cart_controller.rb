@@ -10,17 +10,17 @@ class CartController < ApplicationController
   
     def add_to_cart
       add_item_to_cart(params[:id])
-      redirect_to cart_path
+      redirect_to cart_path, notice: "Added to cart!"
     end
   
     def remove_from_cart
       remove_item_from_cart(params[:id])
-      redirect_to cart_path
+      redirect_to cart_path, notice: "Removed from cart!"
     end
 
     def clear
       clear_cart
-      redirect_to cart_path
+      redirect_to cart_path, notice: "Cart cleared!"
     end
  
   

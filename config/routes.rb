@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get 'cart/add_to_cart/:id', to: 'cart#add_to_cart', as: :add_to_cart
   get 'cart/remove_from_cart/:id', to: 'cart#remove_from_cart', as: :remove_from_cart
 
+  patch 'home/mark_shipped/:id', to: 'home#mark_shipped', as: :mark_shipped
+  patch 'home/mark_unshipped/:id', to: 'home#mark_unshipped', as: :mark_unshipped
+
   # Authentication
   resources :sessions
   resources :users

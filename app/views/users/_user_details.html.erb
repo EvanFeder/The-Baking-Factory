@@ -1,6 +1,6 @@
 <h3><%= @user.username %></h3>
 <p>
-  <b>Role</b>: <%= @user.role %>
+  <b>Role</b>: <%= @user.role.capitalize %>
 </p>
 
 <% if @user.role?(:customer) %>
@@ -8,6 +8,11 @@
   <%= link_to "Link to customer page", @user.customer %>
 </p>
 <% end %>
+
+<p>
+  <b>Active</b>: <%= @user.active ? 'Yes' : 'No' %>
+</p>
+
 
 <p>
   <em>Account created in <%= @user.created_at.year %>.</em>

@@ -6,27 +6,25 @@ class HomeController < ApplicationController
   def home
     if logged_in? && current_user.role?(:admin)
 
+      @breads_bake = create_baking_list_for('bread')
+      @muffins_bake = create_baking_list_for('muffins')
+      @pastries_bake = create_baking_list_for('pastries')
+
+      @unshipped = OrderItem.unshipped.paginate(:page => params[:page]).per_page(10)
+      @shipped = OrderItem.shipped.paginate(:page => params[:page]).per_page(10)
+
     elsif logged_in? && current_user.role?(:customer)
 
     elsif logged_in? && current_user.role?(:baker)
-      # @breads = OrderItem.shipped.select{|o| o.item.category == "bread"}
-      # @muffins = OrderItem.unshipped.select{|o| o.item.category == "muffins"}
-      # @pastries = OrderItem.unshipped.select{|o| o.item.category == "pastries"}
-
-      # @breads_hash = Hash.new(0)
-      # @muffins_hash = Hash.new(0)
-      # @pastries_hash = Hash.new(0)
-      
-      # @breads.each { |good| @breads_hash[good] += good.quantity }
-      # @muffins.each { |good| @muffins_hash[good] += good.quantity }
-      # @pastries.each { |good| @pastries_hash[good] += good.quantity }
-
       @breads = create_baking_list_for('bread')
       @muffins = create_baking_list_for('muffins')
       @pastries = create_baking_list_for('pastries')
 
-
     elsif logged_in? && current_user.role?(:shipper)
+      @unshipped = OrderItem.unshipped.paginate(:page => params[:page]).per_page(10)
+      @shipped = OrderItem.shipped.paginate(:page => params[:page]).per_page(10)
+
+
 
     end
   end
@@ -45,6 +43,21 @@ class HomeController < ApplicationController
     @customers = Customer.search(@query)
     @activeitems = Item.active.search(@query)
     @allitems = Item.search(@query)
+  end
+
+
+  def mark_shipped
+    @item = OrderItem.find_by_id(params[:id])
+    @item.shipped_on = Date.today
+    @item.save!
+    redirect_to home_path
+  end
+
+  def mark_unshipped
+    @item = OrderItem.find_by_id(params[:id])
+    @item.shipped_on = nil
+    @item.save!
+    redirect_to home_path
   end
 
 
