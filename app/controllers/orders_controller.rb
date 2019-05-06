@@ -19,13 +19,21 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
+    @cart = get_list_of_items_in_cart
+    @subtotal = calculate_cart_items_cost
   end
 
   def create
     @order = Order.new(order_params)
     @order.date = Date.current
+    @order.grand_total = calculate_cart_items_cost
+    if logged_in? && current_user.role?(:customer)
+      @order.customer_id = current_user.customer.id
+    end
+
     if @order.save
       save_each_item_in_cart(@order)
+      clear_cart
       @order.pay
       redirect_to @order, notice: "Thank you for ordering from the Baking Factory."
     else
@@ -40,7 +48,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:address_id, :customer_id, :grand_total)
+    params.require(:order).permit(:address_id, :customer_id, :credit_card_number, :expiration_month, :expiration_year)
   end
 
 end

@@ -1,1 +1,14 @@
 <%= render partial: "partials/order_item_list", locals: {order_items: @current_cart} %>
+<% if @current_cart.empty? %>
+    <h5>Cart is empty.</h5></p>
+<% end %>
+<hr>
+<h5> Subtotal: <%= number_to_currency @subtotal %> </h5>
+<% unless @current_cart.empty? %>
+    <%= link_to(checkout_path, class: 'waves-effect waves-light btn') do %>
+        &nbsp;Checkout
+    <% end %>
+    <%= link_to(clear_path, data: {confirm: "Are you sure you want to clear your cart?"}, class: 'waves-effect waves-light btn btn-alert') do %>
+        &nbsp;<%= "Clear Cart" %>
+    <% end %>
+<% end %>

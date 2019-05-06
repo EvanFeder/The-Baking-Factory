@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'orders/new', to: 'orders#new', as: :checkout
   get 'cart/index', to: 'cart#index', as: :cart
+  get 'cart/clear', to: 'cart#clear', as: :clear
   get 'cart/add_to_cart/:id', to: 'cart#add_to_cart', as: :add_to_cart
   get 'cart/remove_from_cart/:id', to: 'cart#remove_from_cart', as: :remove_from_cart
 

@@ -1,8 +1,8 @@
-
-
-# turn to checkout
+<%= render partial: "partials/order_item_list", locals: {order_items: @cart} %>
+<hr>
+<h5> Subtotal: <%= number_to_currency @subtotal %> </h5>
 <%= render partial: "partials/form_structure", locals: {object: @order, 
-                                                        type_of_form: "Place an Order with the Baking Factory",
+                                                        type_of_form: "Checkout Order",
                                                         fields: "fields"} %>
 
 

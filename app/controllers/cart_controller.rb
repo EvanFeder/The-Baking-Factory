@@ -17,6 +17,11 @@ class CartController < ApplicationController
       remove_item_from_cart(params[:id])
       redirect_to cart_path
     end
+
+    def clear
+      clear_cart
+      redirect_to cart_path
+    end
  
   
   end
