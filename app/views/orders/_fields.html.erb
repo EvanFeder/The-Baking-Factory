@@ -1,4 +1,4 @@
     <%= f.input :address_id, collection: get_address_options(current_user), include_blank: true, input_html: {class: "avg"} %>
     <%= f.input :credit_card_number, input_html: {class: "avg"} %>
-    <%= f.input :expiration_month, input_html: {class: "avg"} %>
-    <%= f.input :expiration_year, input_html: {class: "avg"} %>
+    <%= f.input :expiration_month, collection: (1...13).to_a, input_html: {class: "avg"} %>
+    <%= f.input :expiration_year, collection: (Date.current.year...(Date.current.year + 10)).to_a, input_html: {class: "avg"} %>

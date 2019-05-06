@@ -21,15 +21,22 @@ class OrdersController < ApplicationController
     @order = Order.new
     @cart = get_list_of_items_in_cart
     @subtotal = calculate_cart_items_cost
+    @shipping = @order.shipping_costs
+    @order.grand_total = @subtotal + @shipping
   end
 
   def create
     @order = Order.new(order_params)
     @order.date = Date.current
-    @order.grand_total = calculate_cart_items_cost
+    
     if logged_in? && current_user.role?(:customer)
       @order.customer_id = current_user.customer.id
     end
+
+    @cart = get_list_of_items_in_cart
+    @subtotal = calculate_cart_items_cost
+    @shipping = @order.shipping_costs
+    @order.grand_total = @subtotal + @shipping
 
     if @order.save
       save_each_item_in_cart(@order)

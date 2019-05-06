@@ -1,6 +1,9 @@
-<%= render partial: "partials/order_item_list", locals: {order_items: @cart} %>
+<%= render partial: "partials/order_item_list", locals: {order_items: @cart} unless @cart.nil? %>
 <hr>
 <h5> Subtotal: <%= number_to_currency @subtotal %> </h5>
+<h5> Shipping Cost: <%= number_to_currency @shipping %> </h5>
+<h5> Grand Total: <%= number_to_currency (@order.grand_total) %> </h5>
+
 <%= render partial: "partials/form_structure", locals: {object: @order, 
                                                         type_of_form: "Checkout Order",
                                                         fields: "fields"} %>
