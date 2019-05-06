@@ -10,6 +10,7 @@ class HomeController < ApplicationController
       for order in Order.all do
         @total_sales = @total_sales + order.grand_total
       end
+      
 
       @breads_bake = create_baking_list_for('bread')
       @muffins_bake = create_baking_list_for('muffins')
