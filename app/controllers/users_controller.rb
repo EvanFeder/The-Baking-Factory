@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     authorize_resource
   
     def index
-      # finding all the active owners and paginating that list (will_paginate)
       @users = User.alphabetical.paginate(page: params[:page]).per_page(10)
     end
   
