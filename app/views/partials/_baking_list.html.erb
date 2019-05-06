@@ -1,18 +1,20 @@
-<table class="table table-striped">
-<thead>
-  <tr>
-    <th width="300">Item</th>
-    <th width="100">Quantity</th>
-    <th width="100">Units Per</th>
-  </tr>
-</thead>
-<tbody>
-  <% order_items.each do |oi, quantity| %>
+<% if order_items.empty? %>
+  <h5>Nothing to bake at this time.</h5></p>
+<% else %>
+  <table class="table table-striped">
+  <thead>
     <tr>
-      <td><%= link_to oi.item.name, item_path(oi.item) %></td>
-      <td align="center"><%= quantity %></td>
-      <td align="center"><%= oi.item.units_per_item %></td>
+      <th width="300">Item</th>
+      <th width="100">Quantity</th>
     </tr>
-  <% end %>
-</tbody>
-</table>
+  </thead>
+  <tbody>
+      <% order_items.each do |name, quantity| %>
+        <tr>
+          <td><%= name %></td>
+          <td align="center"><%= quantity %></td>
+        </tr>
+    <% end %>
+  </tbody>
+  </table>
+<% end %>
