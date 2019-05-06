@@ -13,7 +13,7 @@
   </div>
 
   <div id="test1" class="col s12">
-    
+    <%= line_chart Order.group_by_day(:created_at).count %>
   </div>
 
   <div id="test2" class="col s12">

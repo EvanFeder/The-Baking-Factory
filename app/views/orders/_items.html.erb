@@ -1,0 +1,19 @@
+<h3> Items </h3>
+<table class="table table-striped">
+<thead>
+    <tr>
+    <th width="300">Name</th>
+    <th width="100">Price Per</th>
+    <th width="100">Quantity</th>
+    </tr>
+</thead>
+<tbody>
+    <% order_items.each do |oi| %>
+    <tr>
+        <td><%= link_to oi.item.name, item_path(oi.item) %></td>
+        <td><%= number_to_currency oi.item.current_price %></td>
+        <td><%= oi.quantity %></td>
+    </tr>
+    <% end %>
+</tbody>
+</table>

@@ -1,0 +1,76 @@
+<h3> Welcome loyal customer! </h3>
+<br>
+<h4> Recent Orders </h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="100">Date</th>
+      <th width="225">Customer</th>
+      <th width="225">Recipient</th>
+      <th width="100">Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><%= link_to order.date.strftime('%m/%d/%y'), order_path(order) %></td>
+        <td><%= link_to order.customer.name, customer_path(order.customer) %></td>
+        <td><%= link_to order.address.recipient, address_path(order.address) %></td>
+        <td><%= number_to_currency order.grand_total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= will_paginate @orders, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+
+
+<h4> Purchased Items </h4>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="300">Name</th>
+        <th width="100">Price</th>
+        <th width="100">Units</th>
+        <th width="75">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, item_path(item) %></td>
+          <td><%= number_to_currency item.current_price %></td>
+          <td><%= item.units_per_item %> items </td>
+            <td>
+                <%= link_to(add_to_cart_path(item.id), class: 'button tiny radius') do %>
+                  &nbsp;Add to Cart&nbsp;
+                <% end %>
+              </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<h4> Suggested Item </h4>
+<table class="table table-striped">
+    <thead>
+        <tr>
+        <th width="300">Name</th>
+        <th width="100">Price</th>
+        <th width="100">Units</th>
+        <th width="75">&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%= link_to @random_item.name, item_path(@random_item) %></td>
+            <td><%= number_to_currency @random_item.current_price %></td>
+            <td><%= @random_item.units_per_item %> items </td>
+            <td>
+                <%= link_to(add_to_cart_path(@random_item.id), class: 'button tiny radius') do %>
+                    &nbsp;Add to Cart&nbsp;
+                <% end %>
+            </td>
+        </tr>
+    </tbody>
+</table>

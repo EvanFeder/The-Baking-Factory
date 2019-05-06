@@ -15,6 +15,15 @@ class HomeController < ApplicationController
 
     elsif logged_in? && current_user.role?(:customer)
 
+      @orders = current_user.customer.orders.paginate(:page => params[:page]).per_page(5)
+      @items = []
+      for order in @orders do
+        for oi in order.order_items do
+          @items.push(oi.item)
+        end
+      end
+      @random_item = Item.all.sample
+
     elsif logged_in? && current_user.role?(:baker)
       @breads = create_baking_list_for('bread')
       @muffins = create_baking_list_for('muffins')
