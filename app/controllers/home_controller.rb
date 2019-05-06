@@ -6,6 +6,11 @@ class HomeController < ApplicationController
   def home
     if logged_in? && current_user.role?(:admin)
 
+      @total_sales = 0
+      for order in Order.all do
+        @total_sales = @total_sales + order.grand_total
+      end
+
       @breads_bake = create_baking_list_for('bread')
       @muffins_bake = create_baking_list_for('muffins')
       @pastries_bake = create_baking_list_for('pastries')
